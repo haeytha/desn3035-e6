@@ -39,7 +39,7 @@ jobs:
           path: ./export 
       - name: Generate random tag
         id: random_tag
-        run: |
+        run: 
           TAG="v$(date +'%Y%m%d%H%M%S')"
           echo "TAG=$TAG" >> $GITHUB_ENV
       - name: Create GitHub Release
