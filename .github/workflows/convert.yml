@@ -27,8 +27,7 @@ jobs:
           name: docs
           path: pdfs
 
-
- release:
+release:
     name: Create Release with Docs
     runs-on: ubuntu-latest
     needs: converttopdf # Depends on the successful completion of the `converttopdf` job
