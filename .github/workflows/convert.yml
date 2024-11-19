@@ -1,5 +1,9 @@
 name: Docs to PDF
 
+permissions:
+  contents: write
+  actions: read
+
 on:
   push:
     branches:
@@ -58,3 +62,5 @@ jobs:
           asset_path: ./export/terms.md
           asset_name: terms.md
           asset_content_type: text/markdown
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
