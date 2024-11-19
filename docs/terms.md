@@ -38,5 +38,26 @@ We may update these Terms at any time. Continued use of the site following chang
  <!-- ## 8. Library
 ![Library](./images/brandon-lopez-3E_8XgqRSps-unsplash.jpg) broken Image -->
 
+## 8. Tasks
+- [ ] Task 1
+- [x] Task 2
+- [ ] Task 3
 
+
+
+## 9. showing details 
+<details>
+  <summary>Click here please</summary>
+  This is a headdin  text 
+</details>
+
+ [Google](https://www.google.com "Go to Google")
  
+## 10. this code so important 
+
+```js
+function greet(name) {
+    return `Hello, ${name}!`;
+}
+```
+The end
