@@ -11,21 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      # - uses: baileyjm02/markdown-to-pdf@v1
-      #   with:
-      #     input_dir: docs
-      #     output_dir: pdfs
-      #     images_dir: docs/images
-      #     image_import: ./images
-      #     build_html: false
-      # - uses: actions/upload-artifact@v3
-      #   with:
-      #     name: export
-      #     path: pdfs
       - uses: actions/upload-artifact@v3
         with:
           name: export
-          path: docs      
+          path: docs
 
   release:
     name: Download Artifact and Create Release
@@ -36,25 +25,30 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: export 
-          path: ./export 
+          path: ./export
+
       - name: Generate random tag
         id: random_tag
-        run: 
+        run: |
           TAG="v$(date +'%Y%m%d%H%M%S')"
           echo "TAG=$TAG" >> $GITHUB_ENV
+          echo "Generated tag: $TAG"
+
       - name: Create GitHub Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ env.TAG }} 
+          tag_name: ${{ env.TAG }}
           release_name: "Release ${{ env.TAG }}"
           body: "Automated release with a random tag."
           draft: false
           prerelease: false
+
       - name: Display structure of downloaded files
-        run: ls -R
+        run: ls -R ./export
+
       - name: Upload markdown to Release
         uses: actions/upload-release-asset@v1
         env:
@@ -63,9 +57,4 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./export/terms.md
           asset_name: terms.md
-          asset_content_type: text/markdown          
-        # with:
-        #   upload_url: ${{ steps.create_release.outputs.upload_url }}
-        #   asset_path: ./export/terms.pdf
-        #   asset_name: terms.pdf
-        #   asset_content_type: application/pdf  
+          asset_content_type: text/markdown
