@@ -18,7 +18,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: export
-          path: docs
+          path: pdfs
 
   release:
     name: Download Artifact and Create Release
@@ -59,8 +59,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./export/terms.md
+          asset_path: ./export/terms.pdf
           asset_name: terms.md
-          asset_content_type: text/markdown
+          asset_content_type: application/pdf
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
